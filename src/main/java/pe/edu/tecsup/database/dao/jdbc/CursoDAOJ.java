@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import pe.edu.tecsup.database.dao.ProgramaDAO;
-import pe.edu.tecsup.database.helper.mappers.ProgramaRowMapper;
-import pe.edu.tecsup.database.model.Programa;
+import pe.edu.tecsup.database.dao.CursoDAO;
+import pe.edu.tecsup.database.helper.mappers.CursoRowMapper;
+import pe.edu.tecsup.database.model.Curso;
 
 @Repository
-public class ProgramaDAOJ extends JdbcDaoSupport implements ProgramaDAO {
+public class CursoDAOJ extends JdbcDaoSupport implements CursoDAO {
 
     @Autowired
     private DataSource dataSource;
@@ -23,22 +23,22 @@ public class ProgramaDAOJ extends JdbcDaoSupport implements ProgramaDAO {
     }
 
     @Override
-    public List<Programa> list() {
-        String sql = "select * from programa";
-        return this.getJdbcTemplate().query(sql, new ProgramaRowMapper());
+    public List<Curso> list() {
+        String sql = "select * from curso";
+        return this.getJdbcTemplate().query(sql, new CursoRowMapper());
     }
 
     @Override
-    public Programa get(Long id) {
-        String sql = "select * from programa where id = ?";
+    public Curso get(Long id) {
+        String sql = "select * from curso where id = ?";
 
         // Parámetros del QueryForObjet:
         // (1)Query , (2)Array de Parámetros del Query y  (3) el RowMapper
         try {
             
-            Programa programa = (Programa) this.getJdbcTemplate()
-                    .queryForObject(sql, new Object[]{id}, new ProgramaRowMapper());
-            return programa;
+            Curso curso = (Curso) this.getJdbcTemplate()
+                    .queryForObject(sql, new Object[]{id}, new CursoRowMapper());
+            return curso;
             
         } catch (Exception e) {
             return null;
@@ -46,15 +46,14 @@ public class ProgramaDAOJ extends JdbcDaoSupport implements ProgramaDAO {
     }
 
     @Override
-    public void save(Programa t) {
-        String sql = "insert into programa(nombre,descripcion, codigo)values(?,?,?)";
+    public void save(Curso t) {
+        String sql = "insert into curso(nombre,codigo)values(?,?)";
 
         try {
             this.getJdbcTemplate().update(
                     sql,
                     new Object[]{
                         t.getNombre(),
-                        t.getDescripcion(),
                         t.getCodigo()
                     }
             );
@@ -68,15 +67,14 @@ public class ProgramaDAOJ extends JdbcDaoSupport implements ProgramaDAO {
     }
 
     @Override
-    public void update(Programa t) {
-        String sql = "update programa set nombre=?, descripcion=?, codigo=? where id=?";
+    public void update(Curso t) {
+        String sql = "update curso set nombre=?, codigo=? where id=?";
 
         try {
             this.getJdbcTemplate().update(
                     sql,
                     new Object[]{
                         t.getNombre(),
-                        t.getDescripcion(),
                         t.getCodigo(),
                         t.getId()
                     }
@@ -87,8 +85,8 @@ public class ProgramaDAOJ extends JdbcDaoSupport implements ProgramaDAO {
     }
 
     @Override
-    public void delete(Programa t) {
-        String sql = "delete from programa where id=?";
+    public void delete(Curso t) {
+        String sql = "delete from curso where id=?";
         this.getJdbcTemplate().update(sql, new Object[]{t.getId()});
     }
 

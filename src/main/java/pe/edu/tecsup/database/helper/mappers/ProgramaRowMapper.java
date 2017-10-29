@@ -14,6 +14,7 @@ public class ProgramaRowMapper implements RowMapper<Programa> {
         programa.setId(rs.getLong(1));
         programa.setNombre(rs.getString(2));
         programa.setDescripcion(rs.getString(3));
+        programa.setCodigo(rs.getString(4));
 
         return programa;
 

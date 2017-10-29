@@ -12,7 +12,7 @@ import pe.edu.tecsup.database.model.Programa;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProgramaDAOTests {
+public class ProgramaDAOTest {
 
     @Autowired
     ProgramaDAO programaDAO;

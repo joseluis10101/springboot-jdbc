@@ -12,7 +12,7 @@ import pe.edu.tecsup.database.model.Curso;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CursoDAOTests {
+public class CursoDAOTest {
 
     @Autowired
     CursoDAO cursoDAO;
